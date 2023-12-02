@@ -18,7 +18,7 @@ class ProductsManager {
         const newProduct = this.products.find(prod => prod.code === product.code);
         if (newProduct) {
             console.log(`El código del artículo con nombre "${product.title}" no puede estar repetido`);
-            return "No es posible cargar dos productos con el mismo código"
+            return "No es posible cargar más de un producto con el mismo código"
         }
 
         if (this.products.length === 0) {
