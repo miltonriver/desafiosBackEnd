@@ -10,10 +10,8 @@ class ProductsManager {
 
     // Método para agregar un producto al array
     addProduct(product) {
-        if (!product.title || !product.description || !product.price || !product.thumbnail || !product.code || !product.stock) {
-            console.log(`Todos los campos del artículo con nombre "${product.title}" deben contener datos`);
-            return `Todos los campos deben contener datos`
-        }
+        if (!product.title || !product.description || !product.price || !product.thumbnail || !product.code || !product.stock) 
+            return `Todos los campos del artículo con nombre "${product.title}" deben contener datos`
 
         const newProduct = this.products.find(prod => prod.code === product.code);
         if (newProduct) {
@@ -21,12 +19,9 @@ class ProductsManager {
             return "No es posible cargar más de un producto con el mismo código"
         }
 
-        if (this.products.length === 0) {
-            product.id = 1;
+        if (this.products.length >= 0) {
+            product.id = this.products.length + 1
             this.products.push(product);
-            console.log(`Se agregó el artículo con nombre "${product.title}" al arreglo`)
-        }else{
-            this.products.push({ ...product, id: this.products.length + 1 })
             console.log(`Se agregó el artículo con nombre "${product.title}" al arreglo`)
         }
 
@@ -36,9 +31,9 @@ class ProductsManager {
 
     getProductById(pid){
         const otroProducto = this.products.find(prod => prod.id === pid)
-        if (!otroProducto) {
+        if (!otroProducto)
             return `El producto seleccionado no existe`
-        }
+        
         return otroProducto
     }
 
@@ -51,9 +46,9 @@ console.log(productos.getProducts());
 
 const producto1 = { title: "producto 1", description: "Este es el primer producto de prueba", price: 200, thumbnail: "Sin imagen", code: "abc123", stock: 25 }
 
-const producto2 = { title: "producto 2", description: "Este es otro producto de prueba", price: 200, thumbnail: "Sin imagen", code: "abc1234", stock: 18 }
+const producto2 = { title: "producto 2", description: "Este es otro producto de prueba", price: 200, thumbnail: "Sin imagen", code: "abc123", stock: 18 }
 
-const producto3 = { title: "producto 3", description: "Este es otro producto más de prueba", price: 400, thumbnail: "Sin imagen", code: "abc1234", stock: 20 }
+const producto3 = { title: "producto 3", description: "Este es otro producto más de prueba", price: 400, /* thumbnail: "Sin imagen", */ code: "abc1234", stock: 20 }
 
 // Agregar algunos productos
 console.log(productos.addProduct(producto1));
@@ -65,4 +60,4 @@ if(!productos) {
 }else{
     console.log(productos.getProducts());
 }
-console.log(productos.getProductById(2))
+console.log(productos.getProductById(4))
