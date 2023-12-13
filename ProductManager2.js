@@ -14,7 +14,7 @@ class ProductsManager {
 
     // Método para agregar un producto al array
     addProduct(product) {
-        if (!product.title || !product.description || !product.price || !product.thumbnail || !product.code || !product.stock) 
+        if (!product.title || !product.description || !product.price || !product.thumbnail || !product.code || !product.stock)
             return `Todos los campos del artículo con nombre "${product.title}" deben contener datos`
 
         const newProduct = this.products.find(prod => prod.code === product.code);
@@ -23,11 +23,9 @@ class ProductsManager {
             return "No es posible cargar más de un producto con el mismo código"
         }
 
-        if (this.products.length >= 0) {
-            product.id = this.products.length + 1
-            this.products.push(product);
-            console.log(`Se agregó el artículo con nombre "${product.title}" al arreglo`)
-        }
+        product.id = this.products.length + 1
+        this.products.push(product);
+        console.log(`Se agregó el artículo con nombre "${product.title}" al arreglo`)
 
         this.saveToFile()
 
@@ -35,11 +33,11 @@ class ProductsManager {
 
     }
 
-    getProductById(pid){
+    getProductById(pid) {
         const otroProducto = this.products.find(prod => prod.id === pid)
         if (!otroProducto)
             return `El articulo seleccionado con ID "${pid}" no existe`
-        
+
         return otroProducto
     }
 
@@ -64,12 +62,12 @@ class ProductsManager {
 
     deleteProduct(pid) {
         const eliminarProducto = this.products.filter(prod => prod.id !== pid)
-        if(eliminarProducto){
+        if (eliminarProducto) {
             console.log(`Se eliminó el artículo con ID "${pid}" del arreglo`)
+            this.products = eliminarProducto
             this.saveToFile()
-            return eliminarProducto
+            return this.products//eliminarProducto
         }
-        
     }
 
     saveToFile() {
@@ -108,14 +106,11 @@ console.log(productos.addProduct(producto1));
 console.log(productos.addProduct(producto2));
 console.log(productos.addProduct(producto3));
 // Mostrar la lista de productos ya agregados
-if(!productos) {
-    console.log(productos.getProducts());
-}else{
-    console.log(productos.getProducts());
-}
-console.log(productos.deleteProduct(2));
+
+console.log(productos.getProducts());
+console.log(productos.deleteProduct(3));
 //console.log(productos.getProducts());
 console.log(productos.getProductById(4))
-console.log(productos.updateProduct(3, {price:350, stock:10}))
-console.log(productos.updateProduct(1, {price:315, stock:30}))
+console.log(productos.updateProduct(1, {price:3250, stock:160}))
+console.log(productos.updateProduct(2, {price:305, stock:13}))
 console.log(productos.getProductById(3))
